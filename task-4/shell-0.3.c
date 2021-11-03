@@ -1,11 +1,4 @@
 #include "main.h"
-#include <sys/types.h>
-#include <unistd.h>
-#include <stdio.h>
-#include <stddef.h>
-#include <stdlib.h>
-#include <string.h>
-#include <errno.h>
 
 /**
   * main - a simple shell interpreter

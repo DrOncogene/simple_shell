@@ -1,7 +1,4 @@
 #include "main.h"
-#include <stdlib.h>
-#include <stddef.h>
-#include <string.h>
 
 /**
   * create_argv - creates an null terminated array of words from a string

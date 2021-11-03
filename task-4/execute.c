@@ -1,10 +1,4 @@
 #include "main.h"
-#include <sys/types.h>
-#include <sys/wait.h>
-#include <sys/stat.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
 
 /**
   * execute - executes a program in a child process with the arguments passed

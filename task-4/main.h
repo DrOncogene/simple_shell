@@ -1,6 +1,13 @@
 #ifndef MAIN_H
 #define MAIN_H
 #include <sys/types.h>
+#include <sys/stat.h>
+#include <sys/wait.h>
+#include <unistd.h>
+#include <stdio.h>
+#include <stddef.h>
+#include <stdlib.h>
+#include <string.h>
 
 ssize_t get_input(char **, char **);
 int check_builtin(char *);
