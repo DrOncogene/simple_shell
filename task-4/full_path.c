@@ -1,10 +1,10 @@
-#include "main.h"
+#include "shell.h"
 
 /**
   * get_full_path - creates the absolute path from a program name
-  * @exe: the program executable name
-  * Description: looks for the program 'path' in the directories of the
-  * current environment's PATH variable
+  * @exe: the name of the executable
+  * Description: looks for the program 'exe' in the directories stored
+  * in the current environment's PATH variable
   * Return: pointer to the full path of the program if found, else exe
   */
 char *get_full_path(char *exe)
@@ -19,7 +19,7 @@ char *get_full_path(char *exe)
 	env_path = strdup(getenv("PATH"));
 	dir = strtok_r(env_path, ":", &save_ptr);
 
-	full_path = check_path(dir, exe, &save_ptr);
+	full_path = find_path(dir, exe, &save_ptr);
 
 	free(env_path);
 
@@ -27,13 +27,13 @@ char *get_full_path(char *exe)
 }
 
 /**
-  * check_path - runs through the directories in PATH, looking for the exe
+  * find_path - runs through the directories in PATH, looking for the exe
   * @dir: the first dir in PATH, gotten by first call to strtok_r()
-  * @exe: the program executable
+  * @exe: the name of executable program
   * @save_ptr: pointer passed to strtok_r()
   * Return: the full path if it exist, exe otherwise
   */
-char *check_path(char *dir, char *exe, char **save_ptr)
+char *find_path(char *dir, char *exe, char **save_ptr)
 {
 	char *dir_c, *full_path;
 	int found;
@@ -44,6 +44,8 @@ char *check_path(char *dir, char *exe, char **save_ptr)
 	{
 		dir_c = strdup(dir);
 		full_path = malloc(sizeof(char) * (strlen(dir_c) + strlen(exe) + 2));
+		if (full_path == NULL)
+			return (NULL);
 
 		memcpy(full_path, dir_c, strlen(dir_c));
 		memcpy(full_path + strlen(dir_c), "/", 1);

@@ -1,42 +1,47 @@
-#include "main.h"
+#include "shell.h"
 
 /**
   * create_argv - creates an null terminated array of words from a string
-  * @str: the command string
+  * @comm: the command string
   * Description: uses space character as the delimiter and splits the
   * command string into words, saving the pointer to each word into
   * a malloc'ed array
   * Return: pointer to the array/arg vector
   */
-char **create_argv(char *str)
+char **parse_command(char *comm)
 {
-	char **arr, *str_cpy, *path, *path_cpy;
+	char **args, *comm_cpy, *path, *path_cpy;
 	unsigned int n_words, i;
 
-	if (str == NULL)
+	if (comm == NULL)
 		return (NULL);
 
-	str_cpy = strdup(str);
+	comm_cpy = strdup(comm);
 	n_words = 0;
-	if (strtok(str_cpy, " "))
+	if (strtok(comm_cpy, " "))
 		n_words++;
 	while (strtok(NULL, " "))
 		n_words++;
 
-	arr = malloc(sizeof(int) * 2 * (n_words + 1));
+	args = malloc(sizeof(int) * 2 * (n_words + 1));
+	if (args == NULL)
+	{
+		printf("Unable to allocate memory\n");
+		return (NULL);
+	}
 
-	path = strtok(str, " ");
+	path = strtok(comm, " ");
 	path_cpy = strdup(path);
-	arr[0] = get_full_path(path_cpy);
+	args[0] = get_full_path(path_cpy);
 	for (i = 1; i < n_words; i++)
 	{
 		path = strtok(NULL, " ");
-		arr[i] = strdup(path);
+		args[i] = strdup(path);
 	}
 
-	arr[i] = NULL;
-	free(str_cpy);
+	args[i] = NULL;
+	free(comm_cpy);
 	free(path_cpy);
 
-	return (arr);
+	return (args);
 }

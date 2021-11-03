@@ -1,4 +1,4 @@
-#include "main.h"
+#include "shell.h"
 
 /**
   * main - a simple shell interpreter
@@ -9,7 +9,7 @@
   */
 int main(int ac __attribute__((unused)), char **av, char **env)
 {
-	char **argv, *buff;
+	char **args, *buff;
 	ssize_t m;
 
 	m = 1;
@@ -21,63 +21,12 @@ int main(int ac __attribute__((unused)), char **av, char **env)
 		buff = NULL;
 		m = get_input(&buff, av);
 
-		argv = create_argv(buff);
-		if (execute(argv, env) == -1)
+		args = parse_command(buff);
+		if (execute(args, env) == -1)
 			perror(av[0]);
 
-		free_av_buff(buff, argv);
+		free_av_buff(buff, args);
 	}
 
 	return (0);
-}
-
-/**
-  * get_input - gets the user input command and save it in buff
-  * @buff: the buffer
-  * @av: the arg vector
-  * Return: number of character entered
-  */
-ssize_t get_input(char **buff, char **av)
-{
-	size_t n;
-	ssize_t m;
-
-	n = 0;
-	m = 0;
-
-	m = getline(buff, &n, stdin);
-
-	/*if nothing is entered and 'enter' button pressed. Restart*/
-	if (m == 1)
-		execvp(av[0], av);
-	/* if the input is piped, the next iteration, m is 0 */
-	else if (m < 1)
-	{
-		exit(1);
-	}
-	/* this is to handle EOF when ctrl-D is pressed after input*/
-	if (m > 1 && *(*buff + m - 1) != '\n')
-	{
-		printf("\n");
-		*(*buff + m) =  '\0';
-	}
-	else
-		*(*buff + m - 1) = '\0';
-
-	return (m);
-}
-
-void free_av_buff(char *buff, char **av)
-{
-	int i;
-
-	i = 0;
-	while (av[i])
-	{
-		free(av[i]);
-		i++;
-	}
-
-	free(av);
-	free(buff);
 }
