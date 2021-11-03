@@ -4,8 +4,6 @@
 #include <stdio.h>
 #include <stddef.h>
 #include <stdlib.h>
-#include <string.h>
-#include <errno.h>
 
 /**
   * main - a simple shell interpreter
@@ -28,7 +26,10 @@ int main(int ac __attribute__((unused)), char **av, char **env)
 		buff = NULL;
 		m = get_input(&buff, av);
 
-		argv = malloc(sizeof(char *) * 2);
+		if ((argv = malloc(sizeof(char *) * 2)) == NULL)
+		{
+
+		}
 		argv[0] = buff;
 		argv[1] = NULL;
 
@@ -63,7 +64,10 @@ ssize_t get_input(char **buff, char **av)
 		execvp(av[0], av);
 	/* if the input is piped, the next iteration, m is 0 */
 	else if (m < 1)
+	{
+		printf("#cisfun$ ");
 		exit(1);
+	}
 	/* this is to handle EOF when ctrl-D is pressed after input*/
 	if (m > 1 && *(*buff + m - 1) != '\n')
 		*(*buff + m) =  '\0';
