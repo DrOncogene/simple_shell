@@ -1,53 +1,62 @@
-#ifndef SHELL_H
-#define SHELL_H
-
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
+#ifndef _SHELL_H_
+#define _SHELL_H_
 #include <sys/types.h>
-#include <unistd.h>
 #include <sys/stat.h>
 #include <sys/wait.h>
-#include <signal.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <unistd.h>
+#include <string.h>
 
-/**
- *struct path_s - singly linked list fot path
- *@path: information part of the path
- *@next: pointer to the next node
- */
+/*==================================================*/
+/*============     Shell_Init       ==============*/
+/*==================================================*/
 
-typedef struct path_s
-{
-  char *path;
-  struct path_s *next;
-  char *buffer;
-}
-  paths_t;
+int main(int ac, char **av, char **env);
+void prompt(void);
+void handle(int signals);
+void _EOF(char *buffer);
+void shell_exit(char **command);
 
-void shell(char **argv, char *envp[]);
-void exec_args(char *, char **, char **, char **, paths_t *);
-paths_t *get_path(char **env);
-paths_t *create_struct(paths_t **head, char *str);
-void parse_text(char *str, char **parsed);
-void parse_text_path(char *str, char **parsed);
-void func_exit(char *buffer, char **parsed, paths_t *p_path_string);
-void free_list(paths_t *head);
-void free_parsed(char **parsed);
+/*==================================================*/
+/*============     create_child       ==============*/
+/*==================================================*/
+
+void create_child(char **command, char *name, char **env, int cicles);
+int change_dir(const char *path);
+
+/*==================================================*/
+/*============        Execute       ==============*/
+/*==================================================*/
+
+void execute(char **command, char *name, char **env, int cicles);
+void print_env(char **env);
+char **_getPATH(char **env);
+void msgerror(char *name, int cicles, char **command);
+
+/*==================================================*/
+/*============          Tokening      ==============*/
+/*==================================================*/
+
+char **tokening(char *buffer, const char *s);
+
+/*==================================================*/
+/*============     Free Memory      ==============*/
+/*==================================================*/
+
+void free_dp(char **command);
+void free_exit(char **command);
+
+/*==================================================*/
+/*============  Auxilary_Functions    ==============*/
+/*==================================================*/
+
 int _strcmp(char *s1, char *s2);
-char *_strdup(char *str);
-char *_strcat(char *dest, char *src);
+unsigned int _strlen(char *s);
 char *_strcpy(char *dest, char *src);
 int _atoi(char *s);
-int _strlen(char *s);
-char *check_path(char **parsed, paths_t *h);
-void call_func(char *, char **, char **, char **, paths_t *);
-char *str_concat(char *s1, char *s2);
+char *_strcat(char *dest, char *src);
 
-/**
- * get_paths 
-*/
-char *find_path(char *filename, char *tmp, char *er)
-char *read_dir(char *er, struct dirent *s, char *fil, int l, char *fp, char *t)
-char *save_path(char *tmp, char *path)
+/*============ END      ==============*/
 
-#endif
+#endif /* _SHELL_H_ */
