@@ -23,7 +23,7 @@ int main(int ac __attribute__((unused)), char **av, char **env)
 	while (m > 0)
 	{
 		if (isatty(STDIN_FILENO))
-			write(STDOUT_FILENO, "($) ", 4);
+			write(STDOUT_FILENO, "#cisfun$ ", 9);
 
 		buff = NULL;
 		m = get_input(&buff, av);
