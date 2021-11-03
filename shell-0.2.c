@@ -22,8 +22,8 @@ int main(int ac __attribute__((unused)), char **av, char **env)
 	m = 1;
 	while (m > 0)
 	{
-		if (isatty(STDIN_FILENO))
-			write(STDOUT_FILENO, "my_shell$ ", 10);
+		/*if (isatty(STDIN_FILENO))*/
+		write(STDOUT_FILENO, "#cisfun$ ", 9);
 
 		buff = NULL;
 		m = get_input(&buff, av);
@@ -63,10 +63,7 @@ ssize_t get_input(char **buff, char **av)
 		exit(1);
 	/* this is to handle EOF when ctrl-D is pressed after input*/
 	if (m > 1 && *(*buff + m - 1) != '\n')
-	{
-		printf("\n");
 		*(*buff + m) =  '\0';
-	}
 	else
 		*(*buff + m - 1) = '\0';
 
