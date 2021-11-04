@@ -6,12 +6,12 @@
 
 **Usage: exit**
 
-_julien@ubuntu:~/shell$ _./shell-0.4
+julien@ubuntu:~/shell$ ./shell-0.4
 
 **:) exit**
 
-_julien@ubuntu:~/shell$ _./shell-0.4
+julien@ubuntu:~/shell$ ./shell-0.4
 
 **:) exit 2**
 
-_julien@ubuntu:~/shell$ _
+julien@ubuntu:~/shell$ 
