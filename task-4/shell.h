@@ -10,12 +10,13 @@
 #include <string.h>
 
 ssize_t get_input(char **, char **);
-int check_builtin(char *);
-void print_env(char **);
-void exec_builtin(int, char **);
-void free_av_buff(char *, char **);
+void free_args(char **);
 char **parse_command(char *);
 char *get_full_path(char *);
 char *find_path(char *, char *, char **);
 int execute(char **, char **);
+int str_cmp(char *s1, char *s2);
+unsigned long int str_len(char *s);
+char *mem_cpy(char *dest, const char *src, size_t n);
+char *str_dup(char *s);
 #endif

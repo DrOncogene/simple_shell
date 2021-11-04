@@ -14,9 +14,9 @@ char *get_full_path(char *exe)
 	if (exe == NULL)
 		return (NULL);
 	else if (*exe == '/')
-		return (exe);
+		return (str_dup(exe));
 
-	env_path = strdup(getenv("PATH"));
+	env_path = str_dup(getenv("PATH"));
 	dir = strtok_r(env_path, ":", &save_ptr);
 
 	full_path = find_path(dir, exe, &save_ptr);
@@ -42,15 +42,15 @@ char *find_path(char *dir, char *exe, char **save_ptr)
 	found = 0;
 	while (dir)
 	{
-		dir_c = strdup(dir);
-		full_path = malloc(sizeof(char) * (strlen(dir_c) + strlen(exe) + 2));
+		dir_c = str_dup(dir);
+		full_path = malloc(sizeof(char) * (str_len(dir_c) + str_len(exe) + 2));
 		if (full_path == NULL)
 			return (NULL);
 
-		memcpy(full_path, dir_c, strlen(dir_c));
-		memcpy(full_path + strlen(dir_c), "/", 1);
-		memcpy(full_path + strlen(dir_c) + 1, exe, strlen(exe));
-		*(full_path + strlen(dir_c) + strlen(exe) + 1) = '\0';
+		mem_cpy(full_path, dir_c, str_len(dir_c));
+		mem_cpy(full_path + str_len(dir_c), "/", 1);
+		mem_cpy(full_path + str_len(dir_c) + 1, exe, str_len(exe));
+		*(full_path + str_len(dir_c) + str_len(exe) + 1) = '\0';
 
 		if (stat(full_path, &st) == 0)
 		{
@@ -67,5 +67,5 @@ char *find_path(char *dir, char *exe, char **save_ptr)
 	if (found)
 		return (full_path);
 	else
-		return (strdup(exe));
+		return (str_dup(exe));
 }

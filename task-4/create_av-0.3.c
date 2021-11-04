@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
-  * create_argv - creates an null terminated array of words from a string
+  * parse_command - creates an null terminated array of words from a string
   * @comm: the command string
   * Description: uses space character as the delimiter and splits the
   * command string into words, saving the pointer to each word into
@@ -16,7 +16,7 @@ char **parse_command(char *comm)
 	if (comm == NULL)
 		return (NULL);
 
-	comm_cpy = strdup(comm);
+	comm_cpy = str_dup(comm);
 	n_words = 0;
 	if (strtok(comm_cpy, " "))
 		n_words++;
@@ -31,12 +31,12 @@ char **parse_command(char *comm)
 	}
 
 	path = strtok(comm, " ");
-	path_cpy = strdup(path);
+	path_cpy = str_dup(path);
 	args[0] = get_full_path(path_cpy);
 	for (i = 1; i < n_words; i++)
 	{
 		path = strtok(NULL, " ");
-		args[i] = strdup(path);
+		args[i] = str_dup(path);
 	}
 
 	args[i] = NULL;
