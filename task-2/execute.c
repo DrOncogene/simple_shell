@@ -1,24 +1,18 @@
-#include "main.h"
-#include <sys/types.h>
-#include <sys/wait.h>
-#include <sys/stat.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
+#include "shell.h"
 
 /**
   * execute - executes a program in a child process with the arguments passed
-  * @argv: the argument vector
+  * @args: the argument vector
   * @env: the environment to pass to the program
   * Return: 0 if success, -1 otherwise
   */
-int execute(char **argv, char **env)
+int execute(char **args, char **env)
 {
 	pid_t child;
 	int status;
 	struct stat st;
 
-	if (stat(argv[0], &st) == -1)
+	if (stat(args[0], &st) == -1)
 		return (-1);
 
 	child = fork();
@@ -29,7 +23,7 @@ int execute(char **argv, char **env)
 
 	if (child == 0)
 	{
-		if (execve(argv[0], argv, env) == -1)
+		if (execve(args[0], args, env) == -1)
 			_exit(-1);
 	}
 	else
