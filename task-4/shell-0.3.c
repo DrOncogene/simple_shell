@@ -20,7 +20,7 @@ int main(int ac __attribute__((unused)), char **av, char **env)
 
 		buff = NULL;
 		flag = get_input(&buff, av);
-		
+
 		args = parse_command(buff);
 		free(buff);
 		if (execute(args, env) == -1)
