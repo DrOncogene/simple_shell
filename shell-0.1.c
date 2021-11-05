@@ -22,7 +22,7 @@ int main(int ac __attribute__((unused)), char **av, char **env)
 		flag = get_input(&buff, av);
 
 		args = malloc(sizeof(char *) * 2);
-		args[0] = buff;
+		args[0] = str_dup(strtok(buff, " "));
 		args[1] = NULL;
 		if (execute(args, env) == -1)
 			perror(av[0]);
