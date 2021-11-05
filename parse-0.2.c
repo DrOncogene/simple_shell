@@ -32,7 +32,7 @@ char **parse_command(char *comm)
 
 	path = strtok(comm, " ");
 	path_cpy = str_dup(path);
-	args[0] = get_full_path(path_cpy);
+	args[0] = str_dup(path_cpy);
 	for (i = 1; i < n_words; i++)
 	{
 		path = strtok(NULL, " ");
