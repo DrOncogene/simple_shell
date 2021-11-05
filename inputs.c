@@ -68,5 +68,5 @@ void free_args_exit(char **args)
 {
 	free_args(args);
 
-	exit(0);
+	exit(errno);
 }
