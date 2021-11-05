@@ -16,7 +16,7 @@ int main(int ac __attribute__((unused)), char **av, char **env)
 	while (flag > 0)
 	{
 		if (isatty(STDIN_FILENO))
-			write(STDOUT_FILENO, "my_shell$ ", 10);
+			printf("my_shell$ ");
 
 		buff = NULL;
 		flag = get_input(&buff, av);

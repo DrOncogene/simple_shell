@@ -12,18 +12,20 @@ ssize_t get_input(char **buff, char **args)
 	ssize_t m;
 
 	n = 0;
-	m = 0;
-
 	m = getline(buff, &n, stdin);
 
 	/*if nothing is entered and 'enter' button pressed. Restart*/
 	if (m == 1)
 		execvp(args[0], args);
-	/* if the input is piped, the next iteration, m is 0 */
+	/* if the input is piped or EOF, the next iteration, m is 0 */
 	else if (m < 1)
 	{
 		free(*buff);
-		exit(1);
+		/*if input is from the terminal, restart*/
+		if (isatty(STDIN_FILENO))
+			execvp(args[0], args);
+		/*if it's piped, exit*/
+		exit(0);
 	}
 	/**
 	  * this is to handle EOF when ctrl-D is pressed

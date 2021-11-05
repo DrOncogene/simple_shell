@@ -42,7 +42,6 @@ void exec_builtin(int index, char **args)
   */
 void exit_shell(char **args)
 {
-	printf("exiting shell...\n");
 	free_args_exit(args);
 }
 
