@@ -12,9 +12,11 @@ int execute(char **args, char **env)
 	int status;
 	struct stat st;
 
+	errno = 0;
 	if (stat(args[0], &st) == -1)
 		return (-1);
 
+	errno = 0;
 	child = fork();
 	if (child == -1)
 	{
@@ -23,11 +25,14 @@ int execute(char **args, char **env)
 
 	if (child == 0)
 	{
+		errno = 0;
 		if (execve(args[0], args, env) == -1)
 			_exit(-1);
 	}
 	else
+	{
+		errno = 0;
 		wait(&status);
-
+	}
 	return (0);
 }

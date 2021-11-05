@@ -12,6 +12,7 @@ ssize_t get_input(char **buff, char **args)
 	ssize_t m;
 
 	n = 0;
+	errno = 0;
 	m = getline(buff, &n, stdin);
 
 	/*if nothing is entered and 'enter' button pressed. Restart*/
