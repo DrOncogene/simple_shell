@@ -28,6 +28,11 @@ char **parse_command(char *comm)
 	path_cpy = str_dup(path);
 	args[0] = str_dup(path_cpy);
 	args[1] = NULL;
+	if (strtok(NULL, " ") != NULL)
+	{
+		free(args[0]);
+		args[0] = strdup(" ");
+	}
 
 	free(comm_cpy);
 	free(path_cpy);
