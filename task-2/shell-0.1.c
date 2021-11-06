@@ -21,9 +21,8 @@ int main(int ac __attribute__((unused)), char **av, char **env)
 		buff = NULL;
 		flag = get_input(&buff, av);
 
-		args = malloc(sizeof(char *) * 2);
-		args[0] = buff;
-		args[1] = NULL;
+		args = parse_command(buff);
+		free(buff);
 		if (execute(args, env) == -1)
 			perror(av[0]);
 
