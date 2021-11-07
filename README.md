@@ -1,61 +1,56 @@
-# Simple Shell
+# SIMPLE SHELL PROJECT
 
-## Learning Objectives
-At the end of this project, you are expected to be able to [explain to anyone](https://fs.blog/2021/02/feynman-learning-technique/ "The Feynman Learning Technique"), without the help of Google:
+## NAME
+**simple_shell** - a command line interpreter that take commands and execute them
 
-### General
-* Who designed and implemented the original Unix operating system
-* Who wrote the first version of the UNIX shell
-* Who invented the B programming language (the direct predecessor to the C programming language)
-* Who is Ken Thompson
-* How does a shell work
-* What is a pid and a ppid
-* How to manipulate the environment of the current process
-* What is the difference between a function and a system call
-* How to create processes
-* What are the three prototypes of main
-* How does the shell use the PATH to find the programs
-* How to execute another program with the execve system call
-* How to suspend the execution of a process until one of its children terminates
-* What is EOF / “end-of-file”?
+## SYNOPSIS
+Interactive mode
+: simple_shell
 
-## Requirements
-What is required to implement this project.
+Non-interactive mode
+: commands [...] | simple_shell
+: simple_shell [filename]
 
-### General
-* Allowed editors: [vi](), [vim](), [emacs]()
-* All files will be compiled on Ubuntu 20.04 LTS using [gcc](), using the options [-Wall -Werror -Wextra -pedantic -std=gnu89]()
-* All your files should end with a new line
-* A [README.md]() file, at the root of the folder of the project is mandatory
-* Code should use the [Betty]() style. It will be checked using [betty-style.pl]() and [betty-doc.pl]()
-* Your shell should not have any memory leaks
-* No more than 5 functions per file
-* All your header files should be include guarded
-* Use system calls only when you need to ([why?]())
+## DESCRIPTION
+simple_shell is a simple command line interpreter that works both in interactive and none interactive mode.  
 
-***
+In the interactive mode, the shell request of input and run the commands entered.  
 
-## More Info
+Output of other programs can be piped to it or it can be passed a file containing lines of commands which it excute by line until end of file is reached and the shell exits.  
 
-### Output
-* Unless specified otherwise, your program **must have the exact same output** as [sh]() ([/bin/sh]() as well as the exact same error output.
-* The only difference is when you print an error, the name of the program must be equivalent to your [argv[0]]() (See below)
+## BUILT-IN COMMANDS
+**exit [STATUS]** 
+: exits the shell, returning the integer STATUS to the parent process, if provided, or 0 if not.  
 
-Example of error with [sh]():
-```Bash
-$ echo "qwerty" | /bin/sh
-/bin/sh: 1: qwerty: not found
-$ echo "qwerty" | /bin/../bin/sh
-/bin/../bin/sh: 1: qwerty: not found
-$
-```
+**env** 
+: prints the current environment variables one on each line.  
 
-Same error with your program [hsh]():
+**cd [DIR]** 
+: changed the cwd to **dir** or to previous directory if DIR is **-**, else changes the cwd to $HOME if DIR is not supplied.  
 
-```Bash
-$ echo "qwerty" | ./hsh
-./hsh: 1: qwerty: not found
-$ echo "qwerty" | ./././hsh
-./././hsh: 1: qwerty: not found
-$ 
-```
+**setenv VARIABLE VALUE** 
+: sets the environment variable named VARIABLE to VALUE, if it already exists or adds it to the environment if not.  
+
+**unsetenv VARIABLE**
+: deletes the environment variable VARIABLE.  
+
+**alias [name[='value'] ...]**  
+:: *alias*  
+ with no argument, prints a list of all aliases, one per line in the form *name='value'*.  
+:: *alias name [name2...]*  
+ with only names as argument, it prints only the alias specified by *name*.  
+:: *alias name='value' [..]*  
+ Defines an alias for each *name* whose value is given. If an alias for *name* exists, replaces its value with *value*.
+
+## EXIT VALUES
+**0**:  
+: if in interactive mode or all commands were executed successfully in non-interactive mode.   
+
+**-1**:  
+: if all commands could not be run successfully in non-interactive mode.
+
+**status**:  
+: an integer exit value passed as an argument to the **exit** builtin command.
+
+## COPYRIGHT
+Copyright (c) 2021 Abdulrasheed Nasir. Written as part of the ALX Software Engineering training program. It is free to use, modify and redistribute. There is NO WARRANTY whatsoever.

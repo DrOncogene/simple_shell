@@ -28,7 +28,7 @@ Output of other programs can be piped to it or it can be passed a file containin
 : prints the current environment variables one on each line.  
 
 **cd [DIR]** 
-: changed the cwd to **dir** or to previous directory if DIR is **-**, else changes the cwd to $HOME if dir is not provided.  
+: changed the cwd to **dir** or to previous directory if DIR is **-**, else changes the cwd to $HOME if DIR is not supplied.  
 
 **setenv VARIABLE VALUE** 
 : sets the environment variable named VARIABLE to VALUE, if it already exists or adds it to the environment if not.  
