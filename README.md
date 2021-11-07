@@ -1,24 +1,24 @@
 # SIMPLE SHELL PROJECT
 
-## NAME
+#### NAME
 **simple_shell** - a command line interpreter that take commands and execute them
 
-## SYNOPSIS
-Interactive mode
+#### SYNOPSIS
+Interactive mode  
 : simple_shell
 
-Non-interactive mode
-: commands [...] | simple_shell
+Non-interactive mode  
+: commands [...] | simple_shell  
 : simple_shell [filename]
 
-## DESCRIPTION
+#### DESCRIPTION
 simple_shell is a simple command line interpreter that works both in interactive and none interactive mode.  
 
 In the interactive mode, the shell request of input and run the commands entered.  
 
-Output of other programs can be piped to it or it can be passed a file containing lines of commands which it excute by line until end of file is reached and the shell exits.  
+In the non-interactive mode, output of other programs can be piped to it or it can be passed a file containing lines of commands which it excute by line until end of file is reached and the shell exits.  
 
-## BUILT-IN COMMANDS
+#### BUILT-IN COMMANDS
 **exit [STATUS]** 
 : exits the shell, returning the integer STATUS to the parent process, if provided, or 0 if not.  
 
@@ -42,7 +42,7 @@ Output of other programs can be piped to it or it can be passed a file containin
 :: *alias name='value' [..]*  
  Defines an alias for each *name* whose value is given. If an alias for *name* exists, replaces its value with *value*.
 
-## EXIT VALUES
+#### EXIT VALUES
 **0**:  
 : if in interactive mode or all commands were executed successfully in non-interactive mode.   
 
@@ -52,5 +52,5 @@ Output of other programs can be piped to it or it can be passed a file containin
 **status**:  
 : an integer exit value passed as an argument to the **exit** builtin command.
 
-## COPYRIGHT
+#### COPYRIGHT
 Copyright (c) 2021 Abdulrasheed Nasir. Written as part of the ALX Software Engineering training program. It is free to use, modify and redistribute. There is NO WARRANTY whatsoever.
