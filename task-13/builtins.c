@@ -30,20 +30,13 @@ int check_builtin(char *builtin)
   */
 void exec_builtin(int index, char **args)
 {
-	void (*builtin_ptrs[])(char **) = {exit_shell, print_env,
-		set_env, unset_env};
+	void (*builtin_ptrs[])(char **) = {print_env,
+		env_func, env_func};
 
-	builtin_ptrs[index](args);
-}
-
-/**
-  * exit_shell - exit builtin function. Quits the shell
-  * @args: the args vector
-  * Return: nothing
-  */
-void exit_shell(char **args)
-{
-	free_args_exit(args);
+	if (index == 0)
+		free_args_exit(args);
+	else
+		builtin_ptrs[index - 1](args);
 }
 
 /**
@@ -64,37 +57,38 @@ void print_env(char **args __attribute__((unused)))
 		i++;
 	}
 }
-
-void set_env(char **args)
+/**
+  * env_func - sets or unsets environment variables
+  * @args: the arg vector
+  * Return: nothing
+  */
+void env_func(char **args)
 {
 	int status;
 
-	if (args[1] == NULL || args[2] == NULL)
+	if (str_cmp(args[0], "setenv") == 0)
 	{
-		printf("Usage: setenv VARIABLE VALUE\n");
-		return;
-	}
+		if (args[1] == NULL || args[2] == NULL)
+		{
+			printf("Usage: setenv VARIABLE VALUE\n");
+			return;
+		}
 	
-	if (getenv(args[1]) == NULL)
-		status = setenv(args[1], args[2], 0);
-	else
-		status = setenv(args[1], args[2], 1);
-
-	if (status == -1)
-		perror("Error");
-}
-
-void unset_env(char **args)
-{
-	int status;
-
-	if (args[1] == NULL)
-	{
-		printf("Usage: unsetenv VARIABLE\n");
-		return;
+		if (getenv(args[1]) == NULL)
+			status = setenv(args[1], args[2], 0);
+		else
+			status = setenv(args[1], args[2], 1);
 	}
+	else
+	{
+		if (args[1] == NULL)
+		{
+			printf("Usage: unsetenv VARIABLE\n");
+			return;
+		}
 
-	status = unsetenv(args[1]);
+		status = unsetenv(args[1]);
+	}
 	if (status == -1)
 		perror("Error");
 }

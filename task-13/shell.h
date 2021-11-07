@@ -12,10 +12,8 @@
 extern char **environ;
 ssize_t get_input(char **, char **);
 int check_builtin(char *);
-void exit_shell(char **);
 void print_env(char **);
-void set_env(char **);
-void unset_env(char **);
+void env_func(char **);
 void exec_builtin(int, char **);
 void free_args(char **);
 void free_args_exit(char **);
