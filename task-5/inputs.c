@@ -25,7 +25,7 @@ ssize_t get_input(char **buff, char **args)
 		if (isatty(STDIN_FILENO))
 			execvp(args[0], args);
 		/*if it's piped, exit*/
-		exit(0);
+		exit(errno);
 	}
 	/**
 	  * this is to handle EOF when ctrl-D is pressed

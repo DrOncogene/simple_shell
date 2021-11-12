@@ -8,6 +8,7 @@
 #include <stddef.h>
 #include <stdlib.h>
 #include <string.h>
+#include <errno.h>
 
 ssize_t get_input(char **, char **);
 ssize_t mygetline(char **buff, size_t *n);

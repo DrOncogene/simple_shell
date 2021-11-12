@@ -11,6 +11,8 @@ int str_cmp(char *s1, char *s2)
 	size_t i, j;
 	int res;
 
+	if (s1 == NULL || s2 == NULL)
+		return (-1);
 	i = j = 0;
 	do {
 		if (s1[i] == s2[j])

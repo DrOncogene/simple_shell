@@ -39,6 +39,5 @@ char **parse_command(char *comm)
 	free(comm_cpy);
 	free(path_cpy);
 	
-
 	return (args);
 }

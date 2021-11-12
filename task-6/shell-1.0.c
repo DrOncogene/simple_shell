@@ -27,13 +27,15 @@ int main(int ac __attribute__((unused)), char **av, char **env)
 		index = check_builtin(args[0]);
 		if (index != -1)
 			exec_builtin(index, args);
-		else
+		else if (args[0])
 		{
 			if (execute(args, env) == -1)
-			perror(av[0]);
+				perror(av[0]);
+			free_args(args);
+			args = NULL;
 		}
-
-		free_args(args);
+		if (args)
+			free_args(args);
 	}
 
 	return (0);

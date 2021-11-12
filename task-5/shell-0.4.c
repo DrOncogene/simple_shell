@@ -32,9 +32,10 @@ int main(int ac __attribute__((unused)), char **av, char **env)
 			if (execute(args, env) == -1)
 				perror(av[0]);
 			free_args(args);
+			args = NULL;
 		}
-		else
-			free(args);
+		if (args)
+			free_args(args);
 	}
 
 	return (0);
