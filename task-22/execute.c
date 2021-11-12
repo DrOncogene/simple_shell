@@ -33,5 +33,23 @@ int execute(char **args, char **env)
 		if (WIFEXITED(status))
 			errno = WEXITSTATUS(status);
 	}
+
 	return (0);
+}
+
+/**
+  * exec_builtin - execute a given builtin function
+  * @index: index of the function
+  * @args: the arg vector
+  * Return: nothing
+  */
+void exec_builtin(int index, char **args)
+{
+	int (*builtin_ptrs[])(char **) = {print_env,
+		env_func, env_func, ch_dir, aliasing, help, display_history};
+
+	if (index == 0)
+		free_args_exit(args);
+	else
+		errno = builtin_ptrs[index - 1](args);
 }

@@ -23,7 +23,7 @@ char **parse_command(char *comm)
 	while (strtok(NULL, " "))
 		n_words++;
 
-	args = malloc(sizeof(int) * 2 * (n_words + 1));
+	args = malloc(sizeof(char *) * (n_words + 1));
 	if (args == NULL)
 	{
 		printf("Unable to allocate memory\n");
@@ -38,8 +38,8 @@ char **parse_command(char *comm)
 		path = strtok(NULL, " ");
 		args[i] = str_dup(path);
 	}
-
-	args[i] = NULL;
+	if (n_words > 0)
+		args[i] = NULL;
 	free(comm_cpy);
 	free(path_cpy);
 

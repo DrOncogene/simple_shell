@@ -23,10 +23,15 @@ int main(int ac __attribute__((unused)), char **av, char **env)
 
 		args = parse_command(buff);
 		free(buff);
-		if (execute(args, env) == -1)
-			perror(av[0]);
+		if (args[0])
+		{
+			if (execute(args, env) == -1)
+				perror(av[0]);
 
-		free_args(args);
+			free_args(args);
+		}
+		else
+			free(args);
 	}
 
 	return (0);

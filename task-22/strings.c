@@ -51,6 +51,39 @@ char *mem_cpy(char *dest, const char *src, size_t n)
 }
 
 /**
+  * str_ncmp - compares two strings
+  * @s1: first string
+  * @s2: second string
+  * @n: numbers of char to compare
+  * Return: neg, 0, or pos int if s1 is less than, matches or greater than s2
+  */
+int str_ncmp(char *s1, char *s2, size_t n)
+{
+	size_t i, j;
+	int res;
+
+	j = 0;
+	for (i = 0; i < n; i++)
+	{
+		if (s1[i] == 0)
+			break;
+
+		if (s1[i] == s2[j])
+		{
+			res = 0;
+			j++;
+		}
+		else
+		{
+			res = s1[i] - s2[j];
+			break;
+		}
+	}
+
+	return (res);
+}
+
+/**
   * str_dup - duplicates a string
   * @s: the string
   * Return: pointer to the duplicate or NULL if s is NULL
