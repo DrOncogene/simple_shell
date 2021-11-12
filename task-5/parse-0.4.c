@@ -12,10 +12,11 @@ char **parse_command(char *comm)
 {
 	char **args, *comm_cpy, *path, *path_cpy;
 	unsigned int n_words, i;
+	int prev_errno;
 
 	if (comm == NULL)
 		return (NULL);
-
+	prev_errno = errno;
 	comm_cpy = str_dup(comm);
 	n_words = 0;
 	if (strtok(comm_cpy, " "))
@@ -29,7 +30,6 @@ char **parse_command(char *comm)
 		printf("Unable to allocate memory\n");
 		return (NULL);
 	}
-
 	path = strtok(comm, " ");
 	path_cpy = str_dup(path);
 	if (check_builtin(path_cpy) != -1)
@@ -45,9 +45,9 @@ char **parse_command(char *comm)
 		path = strtok(NULL, " ");
 		args[i] = str_dup(path);
 	}
-
-	args[i] = NULL;
+	if (n_words > 0)
+		args[i] = NULL;
 	free(comm_cpy);
-
+	errno = prev_errno;
 	return (args);
 }

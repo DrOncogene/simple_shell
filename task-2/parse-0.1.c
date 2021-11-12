@@ -25,6 +25,8 @@ char **parse_command(char *comm)
 	}
 
 	path = strtok(comm_cpy, " ");
+	if (path == NULL)
+		path = " ";
 	path_cpy = str_dup(path);
 	args[0] = str_dup(path_cpy);
 	args[1] = NULL;

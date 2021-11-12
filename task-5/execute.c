@@ -27,7 +27,11 @@ int execute(char **args, char **env)
 			_exit(-1);
 	}
 	else
-		wait(&status);
-
+	{
+		if (waitpid(child, &status, 0) == -1)
+			return (-1);
+		if (WIFEXITED(status))
+			errno = WEXITSTATUS(status);
+	}
 	return (0);
 }

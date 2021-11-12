@@ -10,6 +10,8 @@ int check_builtin(char *builtin)
 	char *built_ins[] = {"exit", "env", NULL};
 	int i;
 
+	if (builtin == NULL)
+		return (-1);
 	i = 0;
 	while (built_ins[i])
 	{

@@ -8,6 +8,7 @@
 #include <stddef.h>
 #include <stdlib.h>
 #include <string.h>
+#include <errno.h>
 
 extern char **environ;
 ssize_t get_input(char **, char **);
