@@ -39,7 +39,8 @@ char **parse_command(char *comm)
 		args[i] = str_dup(path);
 	}
 
-	args[i] = NULL;
+	if (n_words > 0)
+		args[i] = NULL;
 	free(comm_cpy);
 	free(path_cpy);
 
